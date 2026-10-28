@@ -26,7 +26,7 @@ class NexoraAppCard extends StatelessWidget {
         : app.latestVersion;
 
     return Container(
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: NexoraColors.surface,
         borderRadius: BorderRadius.circular(14),
@@ -40,23 +40,56 @@ class NexoraAppCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Cabecera: versión sola
-                  Text(
-                    version != null ? 'v$version' : '—',
-                    style: const TextStyle(
-                      color: NexoraColors.mutedStrong,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600,
+                  // Cabecera: versión (con indicador de actualización)
+                  if (app.installed && app.hasUpdate)
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          app.installedVersion ?? '—',
+                          style: const TextStyle(
+                            color: Color(0xFFE53935),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        const Text(
+                          '->',
+                          style: TextStyle(
+                            color: NexoraColors.muted,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          app.latestVersion ?? '—',
+                          style: const TextStyle(
+                            color: Color(0xFF43A047),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    )
+                  else
+                    Text(
+                      version ?? '—',
+                      style: const TextStyle(
+                        color: NexoraColors.mutedStrong,
+                        fontSize: 12,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 8),
                   // Sección media: icono + nombre + subtítulo
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        width: 44,
-                        height: 44,
+                        width: 40,
+                        height: 40,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: NexoraColors.surfaceAlt,
@@ -66,8 +99,8 @@ class NexoraAppCard extends StatelessWidget {
                         child: app.iconAsset != null
                             ? SvgPicture.asset(
                                 app.iconAsset!,
-                                width: 30,
-                                height: 30,
+                                width: 26,
+                                height: 26,
                               )
                             : Text(
                                 app.name.isNotEmpty
@@ -80,7 +113,7 @@ class NexoraAppCard extends StatelessWidget {
                                 ),
                               ),
                       ),
-                      const SizedBox(width: 10),
+                      const SizedBox(width: 8),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,7 +146,7 @@ class NexoraAppCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 6),
                   Text(
                     app.description,
                     style: const TextStyle(
@@ -139,10 +172,10 @@ class NexoraAppCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 6),
           if (app.lastUpdated != null)
             Padding(
-              padding: const EdgeInsets.only(bottom: 8),
+              padding: const EdgeInsets.only(bottom: 6),
               child: Text(
                 'Última actualización: ${_formatDate(app.lastUpdated!)}',
                 style: const TextStyle(
