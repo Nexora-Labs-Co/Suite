@@ -25,7 +25,7 @@ class NexoraAppCard extends StatelessWidget {
         : app.latestVersion;
 
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: NexoraColors.surface,
         borderRadius: BorderRadius.circular(14),
@@ -34,125 +34,134 @@ class NexoraAppCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Cabecera: versión y enlace a GitHub
-          Row(
-            children: [
-              Text(
-                version != null ? 'v$version' : '—',
-                style: const TextStyle(
-                  color: NexoraColors.mutedStrong,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const Spacer(),
-              TextButton(
-                onPressed: () => _openUrl(app.resolvedGithubUrl),
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  minimumSize: const Size(0, 0),
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                ),
-                child: const Text(
-                  'GITHUB ↗',
-                  style: TextStyle(
-                    color: NexoraColors.muted,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w600,
-                    letterSpacing: 0.6,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          // Sección media: icono + nombre + subtítulo
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: 46,
-                height: 46,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: NexoraColors.surfaceAlt,
-                  borderRadius: BorderRadius.circular(12),
-                  border: Border.all(color: NexoraColors.border),
-                ),
-                child: Text(
-                  app.name.isNotEmpty ? app.name[0].toUpperCase() : '?',
-                  style: const TextStyle(
-                    color: NexoraColors.foreground,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 19,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      app.name,
-                      style: const TextStyle(
-                        color: NexoraColors.foreground,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 16,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    if (app.subtitle != null) ...[
-                      const SizedBox(height: 2),
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Cabecera: versión y enlace a GitHub
+                  Row(
+                    children: [
                       Text(
-                        app.subtitle!,
+                        version != null ? 'v$version' : '—',
                         style: const TextStyle(
-                          color: NexoraColors.muted,
+                          color: NexoraColors.mutedStrong,
                           fontSize: 12,
+                          fontWeight: FontWeight.w600,
                         ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const Spacer(),
+                      TextButton(
+                        onPressed: () => _openUrl(app.resolvedGithubUrl),
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: const Size(0, 0),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        child: const Text(
+                          'GITHUB ↗',
+                          style: TextStyle(
+                            color: NexoraColors.muted,
+                            fontSize: 11,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.6,
+                          ),
+                        ),
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 10),
+                  // Sección media: icono + nombre + subtítulo
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: 42,
+                        height: 42,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          color: NexoraColors.surfaceAlt,
+                          borderRadius: BorderRadius.circular(10),
+                          border: Border.all(color: NexoraColors.border),
+                        ),
+                        child: Text(
+                          app.name.isNotEmpty ? app.name[0].toUpperCase() : '?',
+                          style: const TextStyle(
+                            color: NexoraColors.foreground,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 18,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              app.name,
+                              style: const TextStyle(
+                                color: NexoraColors.foreground,
+                                fontWeight: FontWeight.w700,
+                                fontSize: 15,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            if (app.subtitle != null) ...[
+                              const SizedBox(height: 2),
+                              Text(
+                                app.subtitle!,
+                                style: const TextStyle(
+                                  color: NexoraColors.muted,
+                                  fontSize: 11.5,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ],
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    app.description,
+                    style: const TextStyle(
+                      color: NexoraColors.mutedStrong,
+                      fontSize: 12,
+                      height: 1.3,
+                    ),
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  if (app.lastUpdated != null) ...[
+                    const SizedBox(height: 6),
+                    Text(
+                      'Última actualización: ${_formatDate(app.lastUpdated!)}',
+                      style: const TextStyle(
+                        color: NexoraColors.muted,
+                        fontSize: 11,
+                      ),
+                    ),
                   ],
-                ),
+                  if (app.hasUpdate) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      'Actualización disponible: v${app.latestVersion}',
+                      style: const TextStyle(
+                        color: NexoraColors.accent,
+                        fontSize: 11,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ],
               ),
-            ],
+            ),
           ),
           const SizedBox(height: 10),
-          Text(
-            app.description,
-            style: const TextStyle(
-              color: NexoraColors.mutedStrong,
-              fontSize: 12.5,
-              height: 1.35,
-            ),
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-          ),
-          if (app.lastUpdated != null) ...[
-            const SizedBox(height: 8),
-            Text(
-              'Última actualización: ${_formatDate(app.lastUpdated!)}',
-              style: const TextStyle(
-                color: NexoraColors.muted,
-                fontSize: 11.5,
-              ),
-            ),
-          ],
-          if (app.hasUpdate) ...[
-            const SizedBox(height: 6),
-            Text(
-              'Actualización disponible: v${app.latestVersion}',
-              style: const TextStyle(
-                color: NexoraColors.accent,
-                fontSize: 11.5,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ],
-          const SizedBox(height: 14),
           // Sección inferior: botón principal + opciones
           Row(
             children: [
