@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center">Registro de Cambios</h1>
-  <p align="center"><strong>Historial de modificaciones, mejoras y correcciones del proyecto</strong></p>
+  <p align="center"><strong>Historial de modificaciones, mejoras y correcciones de Nexora Launcher</strong></p>
 </p>
 
 ---
@@ -26,10 +26,19 @@ El formato de este registro está basado en [Keep a Changelog](https://keepachan
 
 ### Añadido
 
-- Documentación base estandarizada de la plantilla: `README.md`, `CONTRIBUTING.md`, `SECURITY.md` y `CHANGELOG.md`.
-- Estructura mínima, reglas de gobernanza y convenciones iniciales de arquitectura de Nexora.
-- Encabezados de imagen unificados con estilo de bordes redondeados para toda la suite de documentación.
+- Documentación base adaptada para Nexora Launcher (`README.md`, `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`).
+- Estructura inicial del proyecto en Flutter + Rust/FFI.
+- Pantalla principal con tarjetas en cuadrícula y lista.
+- Integración con GitHub Releases para detección de actualizaciones.
+- Instalación por plataforma (Linux/Windows).
+- Ventana con bordes redondeados y header personalizado.
+- Tipografía Gliker y paleta monocromática con acento `#A50021`.
+
+### Cambiado
+
+- Barra de herramientas unificada con iconos de Font Awesome.
+- Ancho controlado de la barra de búsqueda.
 
 ---
 
-[Sin publicar]: https://github.com/Nexora-Company/NexoraTemplate/commits/main
+[Sin publicar]: https://github.com/Nexora-Labs-Co/NexoraSuite/commits/main

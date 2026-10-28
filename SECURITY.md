@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center">Política de Seguridad</h1>
-  <p align="center"><strong>Directrices para la notificación y gestión de vulnerabilidades en Nexora</strong></p>
+  <p align="center"><strong>Directrices para la notificación y gestión de vulnerabilidades en Nexora Launcher</strong></p>
 </p>
 
 ---
@@ -21,10 +21,10 @@
 
 Las versiones del proyecto que actualmente reciben actualizaciones de seguridad se detallan en la siguiente tabla:
 
-| Versión                 | Soportada |
-| ----------------------- | --------- |
-| `{{TODO: e.g., 1.x.x}}` | [x] Sí    |
-| `{{TODO: e.g., 0.x.x}}` | [ ] No    |
+| Versión | Soportada |
+| ------- | --------- |
+| `1.x.x` | Sí        |
+| `0.x.x` | No        |
 
 _(Actualiza esta tabla conforme el proyecto evolucione y se emitan releases)._
 
@@ -32,15 +32,17 @@ _(Actualiza esta tabla conforme el proyecto evolucione y se emitan releases)._
 
 ### Entra dentro del alcance:
 
-- Vulnerabilidades directas en el código fuente del proyecto.
+- Vulnerabilidades directas en el código fuente del proyecto (Flutter/Dart y Rust).
 - Dependencias vulnerables explotables en el contexto de la aplicación.
 - Exposición accidental de credenciales, secretos o información sensible.
+- Problemas en la descarga/instalación de paquetes o actualizaciones automáticas.
 
 ### Queda fuera del alcance:
 
 - Problemas o vulnerabilidades en proyectos o dependencias upstream (de terceros).
 - Ataques de ingeniería social dirigidos a colaboradores o usuarios.
 - Pruebas de denegación de servicio (DoS / DDoS) que afecten la disponibilidad de infraestructura externa.
+- Vulnerabilidades en aplicaciones de terceros gestionadas por el launcher.
 
 ## Cómo reportar una vulnerabilidad
 

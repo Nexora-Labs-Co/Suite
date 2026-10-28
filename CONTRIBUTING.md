@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center">Guía de Contribución</h1>
-  <p align="center"><strong>Directrices y flujos de trabajo para colaborar en proyectos de Nexora</strong></p>
+  <p align="center"><strong>Directrices y flujos de trabajo para colaborar en Nexora Launcher</strong></p>
 </p>
 
 ---
@@ -22,7 +22,7 @@
 
 ## Bienvenida
 
-Agradecemos tu interés en colaborar con Nexora. Este repositorio sirve como plantilla base y punto de partida para nuestros proyectos. El código fuente es abierto a la comunidad y todas las contribuciones orientadas a mejorar la calidad, estructura o rendimiento del software son bienvenidas.
+Agradecemos tu interés en colaborar con Nexora Launcher. Este proyecto es el centro de control y gestor de aplicaciones del ecosistema Nexora para Windows y Linux. Las contribuciones orientadas a mejorar la calidad, estructura o rendimiento del software son bienvenidas.
 
 ## Antes de empezar
 
@@ -49,12 +49,53 @@ Sigue estos pasos para realizar contribuciones al repositorio:
 Para configurar el entorno de trabajo localmente, ejecuta los siguientes comandos:
 
 ```bash
-# Instalar dependencias
-{{TODO: comando de instalación, ej. npm install}}
+# Instalar dependencias de Flutter
+flutter pub get
 
-# Iniciar servidor de desarrollo
-{{TODO: comando de desarrollo, ej. npm run dev}}
+# Ejecutar en Linux
+flutter run -d linux
 
-# Ejecutar la suite de pruebas
-{{TODO: comando de pruebas, ej. npm test}}
+# Ejecutar en Windows
+flutter run -d windows
+
+# Analizar el código
+flutter analyze
+
+# Compilar el núcleo Rust (opcional)
+cd rust/nexora_core
+cargo build --release
+cd ../..
 ```
+
+## Estándares de código
+
+- **Dart/Flutter:** Sigue las reglas definidas en `analysis_options.yaml` y ejecuta `flutter analyze` antes de enviar un PR.
+- **Estilo:** Mantén la estética monocromática (negro `#090C02`, blanco `#EBF5EE`, grises neutros) y el acento `#A50021`.
+- **Rust:** Formatea con `cargo fmt` y valida con `cargo clippy` cuando modifiques `rust/nexora_core`.
+- **Commits:** Usa Conventional Commits para mantener un historial claro.
+
+## Checklist del Pull Request
+
+Antes de enviar tu PR, verifica lo siguiente:
+
+- [ ] El código compila sin errores (`flutter build linux` o `flutter build windows`).
+- [ ] `flutter analyze` no reporta errores.
+- [ ] La interfaz mantiene la estética monocromática de Nexora.
+- [ ] Se actualizaron las pruebas o documentación afectadas.
+- [ ] El PR describe claramente el cambio y su motivación.
+
+## Proceso de revisión
+
+Los mantenedores revisarán tu PR y podrán solicitar cambios. Una vez aprobado, se integrará a la rama principal.
+
+## Acuerdo de contribución (CLA)
+
+Al contribuir, aceptas que tus aportes se licencien bajo los términos de la licencia del proyecto (PolyForm Noncommercial 1.0.0).
+
+## Código de conducta
+
+Trata a todos los colaboradores con respeto. No se tolerará el acoso ni la discriminación.
+
+## Licencia
+
+Este proyecto se distribuye bajo los términos de la licencia **PolyForm Noncommercial 1.0.0**. Consulta [LICENSE](LICENSE) para más detalles.
