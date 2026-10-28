@@ -47,15 +47,10 @@ class NexoraActionBar extends StatelessWidget {
               child: TextField(
                   onChanged: onSearchChanged,
                   style: const TextStyle(fontSize: 13),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Search apps...',
-                    prefixIcon: const FaIcon(
-                      FontAwesomeIcons.magnifyingGlass,
-                      size: 14,
-                      color: NexoraColors.muted,
-                    ),
                     isDense: true,
-                    contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                    contentPadding: EdgeInsets.symmetric(vertical: 10),
                   ),
                 ),
               ),
