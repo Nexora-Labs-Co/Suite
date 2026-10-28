@@ -282,7 +282,7 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
               crossAxisCount: cross,
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
-              mainAxisExtent: 175,
+              mainAxisExtent: 150,
             ),
             itemCount: apps.length,
             itemBuilder: (ctx, i) => NexoraAppCard(

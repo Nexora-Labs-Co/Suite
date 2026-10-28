@@ -146,28 +146,7 @@ class NexoraAppCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 4),
-                  Text(
-                    app.description,
-                    style: const TextStyle(
-                      color: NexoraColors.mutedStrong,
-                      fontSize: 12,
-                      height: 1.3,
-                    ),
-                    maxLines: 3,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  if (app.hasUpdate) ...[
-                    const SizedBox(height: 4),
-                    Text(
-                      'Actualización disponible: v${app.latestVersion}',
-                      style: const TextStyle(
-                        color: NexoraColors.accent,
-                        fontSize: 11,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
+
                 ],
               ),
             ),
