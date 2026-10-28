@@ -41,21 +41,24 @@ class NexoraActionBar extends StatelessWidget {
             onPressed: isRefreshing ? null : onRefresh,
           ),
           const SizedBox(width: 12),
-          Expanded(
-            child: SizedBox(
-              height: _height,
-              child: TextField(
-                onChanged: onSearchChanged,
-                style: const TextStyle(fontSize: 13),
-                decoration: InputDecoration(
-                  hintText: 'Search apps...',
-                  prefixIcon: const FaIcon(
-                    FontAwesomeIcons.magnifyingGlass,
-                    size: 14,
-                    color: NexoraColors.muted,
+          Flexible(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 420),
+              child: SizedBox(
+                height: _height,
+                child: TextField(
+                  onChanged: onSearchChanged,
+                  style: const TextStyle(fontSize: 13),
+                  decoration: InputDecoration(
+                    hintText: 'Search apps...',
+                    prefixIcon: const FaIcon(
+                      FontAwesomeIcons.magnifyingGlass,
+                      size: 14,
+                      color: NexoraColors.muted,
+                    ),
+                    isDense: true,
+                    contentPadding: const EdgeInsets.symmetric(vertical: 10),
                   ),
-                  isDense: true,
-                  contentPadding: const EdgeInsets.symmetric(vertical: 10),
                 ),
               ),
             ),
