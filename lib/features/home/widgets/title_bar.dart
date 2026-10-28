@@ -4,43 +4,45 @@ import 'package:window_manager/window_manager.dart';
 import '../../../core/theme/app_theme.dart';
 
 class NexoraTitleBar extends StatelessWidget {
-  const NexoraTitleBar({
-    super.key,
-    this.onSettings,
-  });
-
-  final VoidCallback? onSettings;
+  const NexoraTitleBar({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 42,
+      height: 44,
       color: NexoraColors.surface,
       child: Row(
         children: [
           Expanded(
             child: DragToMoveArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 14),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Row(
                   children: [
-                    _LogoMark(),
-                    const SizedBox(width: 10),
-                    const Text(
-                      'Nexora Suite',
+                    Text(
+                      'NEXORA',
                       style: TextStyle(
+                        fontFamily: 'Gliker',
+                        fontWeight: FontWeight.w700,
+                        fontSize: 17,
+                        letterSpacing: 1.2,
                         color: NexoraColors.foreground,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14,
-                        letterSpacing: 0.2,
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 10),
+                    Container(
+                      width: 1,
+                      height: 18,
+                      color: NexoraColors.borderStrong,
+                    ),
+                    const SizedBox(width: 10),
                     Text(
-                      'Launcher',
+                      'SUITE',
                       style: TextStyle(
-                        color: NexoraColors.muted,
-                        fontSize: 12,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                        letterSpacing: 2.0,
+                        color: NexoraColors.mutedStrong,
                       ),
                     ),
                   ],
@@ -48,12 +50,6 @@ class NexoraTitleBar extends StatelessWidget {
               ),
             ),
           ),
-          IconButton(
-            tooltip: 'Settings',
-            icon: const Icon(Icons.settings_outlined, size: 18),
-            onPressed: onSettings,
-          ),
-          const SizedBox(width: 4),
           WindowCaptionButton.minimize(
             brightness: Brightness.dark,
             onPressed: () => windowManager.minimize(),
@@ -74,29 +70,6 @@ class NexoraTitleBar extends StatelessWidget {
           ),
           const SizedBox(width: 6),
         ],
-      ),
-    );
-  }
-}
-
-class _LogoMark extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 22,
-      height: 22,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: NexoraColors.foreground,
-        borderRadius: BorderRadius.circular(5),
-      ),
-      child: Text(
-        'N',
-        style: TextStyle(
-          color: NexoraColors.background,
-          fontWeight: FontWeight.w800,
-          fontSize: 13,
-        ),
       ),
     );
   }

@@ -68,7 +68,7 @@ class NexoraAppCard extends StatelessWidget {
                       Text(
                         'Update available: v${app.latestVersion}',
                         style: const TextStyle(
-                          color: NexoraColors.foreground,
+                          color: NexoraColors.accent,
                           fontSize: 11,
                           fontWeight: FontWeight.w600,
                         ),

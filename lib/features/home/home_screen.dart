@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:window_manager/window_manager.dart';
 
 import '../../core/models/nexora_app.dart';
 import '../../core/services/app_catalog_service.dart';
@@ -19,7 +20,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with WindowListener {
   final AppCatalogService _catalog = AppCatalogService();
   final InstallerService _installer = InstallerService();
 
@@ -31,17 +32,42 @@ class _HomeScreenState extends State<HomeScreen> {
   AppViewMode _view = AppViewMode.grid;
   String _syncStatus = 'Never checked';
 
+  bool _maximized = false;
+
   @override
   void initState() {
     super.initState();
+    windowManager.addListener(this);
+    _syncMaximized();
     _load();
+  }
+
+  Future<void> _syncMaximized() async {
+    final m = await windowManager.isMaximized();
+    if (mounted) setState(() => _maximized = m);
   }
 
   @override
   void dispose() {
+    windowManager.removeListener(this);
     _catalog.dispose();
     _installer.dispose();
     super.dispose();
+  }
+
+  @override
+  void onWindowMaximize() {
+    setState(() => _maximized = true);
+  }
+
+  @override
+  void onWindowUnmaximize() {
+    setState(() => _maximized = false);
+  }
+
+  @override
+  void onWindowRestore() {
+    _syncMaximized();
   }
 
   Future<void> _load() async {
@@ -166,11 +192,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          NexoraTitleBar(onSettings: () => _showSettings(context)),
-          NexoraActionBar(
+    final radius = _maximized ? 0.0 : 14.0;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(radius),
+      child: Scaffold(
+        body: Column(
+          children: [
+            const NexoraTitleBar(),
+            NexoraActionBar(
             searchQuery: _search,
             onSearchChanged: (v) => setState(() => _search = v),
             sortMode: _sort,
@@ -187,6 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           NexoraFooter(syncStatus: _syncStatus),
         ],
+      ),
       ),
     );
   }
@@ -273,23 +303,4 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  void _showSettings(BuildContext context) {
-    showDialog<void>(
-      context: context,
-      builder: (_) => AlertDialog(
-        backgroundColor: NexoraColors.surfaceAlt,
-        title: const Text('Settings'),
-        content: const Text(
-          'Nexora Launcher settings will be available here.\n'
-          'Includes auto-update, install location and GitHub token.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Close'),
-          ),
-        ],
-      ),
-    );
-  }
 }

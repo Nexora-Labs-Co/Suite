@@ -18,6 +18,7 @@ class NexoraColors {
   static const Color mutedStrong = Color(0xFFB0B6BF);
 
   static const Color danger = Color(0xFFB0B0B0); // kept neutral
+  static const Color accent = Color(0xFFA50021);
 }
 
 class NexoraTheme {
