@@ -9,7 +9,7 @@ class NexoraApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Nexora Launcher',
+      title: 'Nexora Suite',
       debugShowCheckedModeBanner: false,
       theme: NexoraTheme.dark(),
       home: const HomeScreen(),

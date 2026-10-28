@@ -94,7 +94,7 @@ const List<NexoraApp> kNexoraApps = <NexoraApp>[
   ),
   NexoraApp(
     id: 'nexora_launcher',
-    name: 'Nexora Launcher',
+    name: 'Nexora Suite',
     subtitle: 'Suite de Nexora',
     description: 'Centro de control del ecosistema Nexora',
     repo: 'Nexora-Labs-Co/NexoraSuite',

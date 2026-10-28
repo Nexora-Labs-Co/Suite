@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center">Registro de Cambios</h1>
-  <p align="center"><strong>Historial de modificaciones, mejoras y correcciones de Nexora Launcher</strong></p>
+  <p align="center"><strong>Historial de modificaciones, mejoras y correcciones de Nexora Suite</strong></p>
 </p>
 
 ---
@@ -26,7 +26,7 @@ El formato de este registro está basado en [Keep a Changelog](https://keepachan
 
 ### Añadido
 
-- Documentación base adaptada para Nexora Launcher (`README.md`, `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`).
+- Documentación base adaptada para Nexora Suite (`README.md`, `CONTRIBUTING.md`, `SECURITY.md`, `CHANGELOG.md`).
 - Estructura inicial del proyecto en Flutter + Rust/FFI.
 - Pantalla principal con tarjetas en cuadrícula y lista.
 - Integración con GitHub Releases para detección de actualizaciones.

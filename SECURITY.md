@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center">Política de Seguridad</h1>
-  <p align="center"><strong>Directrices para la notificación y gestión de vulnerabilidades en Nexora Launcher</strong></p>
+  <p align="center"><strong>Directrices para la notificación y gestión de vulnerabilidades en Nexora Suite</strong></p>
 </p>
 
 ---

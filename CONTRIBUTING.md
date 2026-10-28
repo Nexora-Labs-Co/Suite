@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center">Guía de Contribución</h1>
-  <p align="center"><strong>Directrices y flujos de trabajo para colaborar en Nexora Launcher</strong></p>
+  <p align="center"><strong>Directrices y flujos de trabajo para colaborar en Nexora Suite</strong></p>
 </p>
 
 ---
@@ -22,7 +22,7 @@
 
 ## Bienvenida
 
-Agradecemos tu interés en colaborar con Nexora Launcher. Este proyecto es el centro de control y gestor de aplicaciones del ecosistema Nexora para Windows y Linux. Las contribuciones orientadas a mejorar la calidad, estructura o rendimiento del software son bienvenidas.
+Agradecemos tu interés en colaborar con Nexora Suite. Este proyecto es el centro de control y gestor de aplicaciones del ecosistema Nexora para Windows y Linux. Las contribuciones orientadas a mejorar la calidad, estructura o rendimiento del software son bienvenidas.
 
 ## Antes de empezar
 

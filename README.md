@@ -1,11 +1,11 @@
 <p align="center">
   <a href="https://github.com/Nexora-Labs-Co/NexoraSuite">
-    <img src="assets/Template-Github.svg" alt="Nexora Launcher Preview" style="border-radius: 20px;" width="100%" />
+    <img src="assets/Template-Github.svg" alt="Nexora Suite Preview" style="border-radius: 20px;" width="100%" />
   </a>
 </p>
 
 <p align="center">
-  <h1 align="center">Nexora Launcher</h1>
+  <h1 align="center">Nexora Suite</h1>
   <p align="center"><strong>Centro de control y gestor de aplicaciones del ecosistema Nexora (Windows y Linux)</strong></p>
   <p align="center">Instala, abre y mantiene actualizadas automáticamente las aplicaciones de Nexora, incluyendo Harmony y otras herramientas.</p>
 </p>
@@ -43,7 +43,7 @@
 
 ## Acerca de
 
-**Nexora Launcher** es el punto de entrada unificado al ecosistema Nexora. Permite descubrir, instalar, abrir y actualizar automáticamente las aplicaciones de Nexora (incluyendo Harmony y otras herramientas) en **Windows** y **Linux**. En Android, las aplicaciones se distribuyen y actualizan mediante APK, por lo que el launcher se centra exclusivamente en escritorio.
+**Nexora Suite** es el punto de entrada unificado al ecosistema Nexora. Permite descubrir, instalar, abrir y actualizar automáticamente las aplicaciones de Nexora (incluyendo Harmony y otras herramientas) en **Windows** y **Linux**. En Android, las aplicaciones se distribuyen y actualizan mediante APK, por lo que el launcher se centra exclusivamente en escritorio.
 
 Su diseño es minimalista y monocromático (negro `#090C02`, blanco `#EBF5EE` y grises neutros), con un acento `#A50021` para estados destacados.
 

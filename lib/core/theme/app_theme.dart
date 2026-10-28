@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-/// Strictly monochrome palette for Nexora Launcher.
+/// Strictly monochrome palette for Nexora Suite.
 class NexoraColors {
   NexoraColors._();
 
