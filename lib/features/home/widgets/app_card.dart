@@ -151,10 +151,10 @@ class NexoraAppCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 4),
+          const SizedBox(height: 2),
           if (app.lastUpdated != null)
             Padding(
-              padding: const EdgeInsets.only(bottom: 4),
+              padding: const EdgeInsets.only(bottom: 2),
               child: Text(
                 'Última actualización: ${_formatDate(app.lastUpdated!)}',
                 style: const TextStyle(
