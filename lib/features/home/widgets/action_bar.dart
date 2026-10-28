@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../core/models/nexora_app.dart';
 import '../../../core/theme/app_theme.dart';
@@ -8,8 +9,6 @@ class NexoraActionBar extends StatelessWidget {
     super.key,
     required this.searchQuery,
     required this.onSearchChanged,
-    required this.sortMode,
-    required this.onSortChanged,
     required this.viewMode,
     required this.onViewModeChanged,
     required this.onRefresh,
@@ -18,12 +17,13 @@ class NexoraActionBar extends StatelessWidget {
 
   final String searchQuery;
   final ValueChanged<String> onSearchChanged;
-  final SortMode sortMode;
-  final ValueChanged<SortMode> onSortChanged;
   final AppViewMode viewMode;
   final ValueChanged<AppViewMode> onViewModeChanged;
   final VoidCallback onRefresh;
   final bool isRefreshing;
+
+  static const double _height = 40;
+  static const double _radius = 8;
 
   @override
   Widget build(BuildContext context) {
@@ -34,76 +34,83 @@ class NexoraActionBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          IconButton(
-            tooltip: 'Refresh / check updates',
+          _RefreshButton(
+            height: _height,
+            radius: _radius,
+            isRefreshing: isRefreshing,
             onPressed: isRefreshing ? null : onRefresh,
-            icon: isRefreshing
-                ? const SizedBox(
-                    width: 18,
-                    height: 18,
-                    child: CircularProgressIndicator(strokeWidth: 2),
-                  )
-                : const Icon(Icons.refresh, size: 20),
           ),
-          const SizedBox(width: 8),
-          _SortDropdown(value: sortMode, onChanged: onSortChanged),
           const SizedBox(width: 12),
           Expanded(
-            child: TextField(
-              onChanged: onSearchChanged,
-              decoration: const InputDecoration(
-                hintText: 'Search apps...',
-                prefixIcon: Icon(Icons.search, size: 18, color: NexoraColors.muted),
-                isDense: true,
+            child: SizedBox(
+              height: _height,
+              child: TextField(
+                onChanged: onSearchChanged,
+                style: const TextStyle(fontSize: 13),
+                decoration: InputDecoration(
+                  hintText: 'Search apps...',
+                  prefixIcon: const FaIcon(
+                    FontAwesomeIcons.magnifyingGlass,
+                    size: 14,
+                    color: NexoraColors.muted,
+                  ),
+                  isDense: true,
+                  contentPadding: const EdgeInsets.symmetric(vertical: 10),
+                ),
               ),
             ),
           ),
           const SizedBox(width: 12),
-          _ViewToggle(value: viewMode, onChanged: onViewModeChanged),
+          _ViewToggle(
+            height: _height,
+            radius: _radius,
+            value: viewMode,
+            onChanged: onViewModeChanged,
+          ),
         ],
       ),
     );
   }
 }
 
-class _SortDropdown extends StatelessWidget {
-  const _SortDropdown({required this.value, required this.onChanged});
+class _RefreshButton extends StatelessWidget {
+  const _RefreshButton({
+    required this.height,
+    required this.radius,
+    required this.isRefreshing,
+    required this.onPressed,
+  });
 
-  final SortMode value;
-  final ValueChanged<SortMode> onChanged;
-
-  String _label(SortMode m) {
-    switch (m) {
-      case SortMode.nameAsc:
-        return 'Name A-Z';
-      case SortMode.lastUpdated:
-        return 'Last updated';
-      case SortMode.status:
-        return 'Status';
-    }
-  }
+  final double height;
+  final double radius;
+  final bool isRefreshing;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      width: height,
+      height: height,
       decoration: BoxDecoration(
         color: NexoraColors.surfaceAlt,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(radius),
         border: Border.all(color: NexoraColors.border),
       ),
-      child: DropdownButtonHideUnderline(
-        child: DropdownButton<SortMode>(
-          value: value,
-          dropdownColor: NexoraColors.surfaceAlt,
-          style: const TextStyle(color: NexoraColors.foreground, fontSize: 13),
-          icon: const Icon(Icons.expand_more, size: 18, color: NexoraColors.muted),
-          items: SortMode.values
-              .map((m) => DropdownMenuItem(value: m, child: Text(_label(m))))
-              .toList(),
-          onChanged: (v) {
-            if (v != null) onChanged(v);
-          },
+      child: InkWell(
+        onTap: onPressed,
+        borderRadius: BorderRadius.circular(radius),
+        child: Center(
+          child: isRefreshing
+              ? const SizedBox(
+                  width: 16,
+                  height: 16,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : const FaIcon(
+                  FontAwesomeIcons.arrowsRotate,
+                  size: 14,
+                  color: NexoraColors.foreground,
+                ),
         ),
       ),
     );
@@ -111,29 +118,41 @@ class _SortDropdown extends StatelessWidget {
 }
 
 class _ViewToggle extends StatelessWidget {
-  const _ViewToggle({required this.value, required this.onChanged});
+  const _ViewToggle({
+    required this.height,
+    required this.radius,
+    required this.value,
+    required this.onChanged,
+  });
 
+  final double height;
+  final double radius;
   final AppViewMode value;
   final ValueChanged<AppViewMode> onChanged;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: height,
       decoration: BoxDecoration(
         color: NexoraColors.surfaceAlt,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(radius),
         border: Border.all(color: NexoraColors.border),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           _ToggleButton(
-            icon: Icons.grid_view_rounded,
+            height: height,
+            radius: radius,
+            icon: FontAwesomeIcons.tableCells,
             selected: value == AppViewMode.grid,
             onTap: () => onChanged(AppViewMode.grid),
           ),
           _ToggleButton(
-            icon: Icons.view_list_rounded,
+            height: height,
+            radius: radius,
+            icon: FontAwesomeIcons.list,
             selected: value == AppViewMode.list,
             onTap: () => onChanged(AppViewMode.list),
           ),
@@ -145,12 +164,16 @@ class _ViewToggle extends StatelessWidget {
 
 class _ToggleButton extends StatelessWidget {
   const _ToggleButton({
+    required this.height,
+    required this.radius,
     required this.icon,
     required this.selected,
     required this.onTap,
   });
 
-  final IconData icon;
+  final double height;
+  final double radius;
+  final FaIconData icon;
   final bool selected;
   final VoidCallback onTap;
 
@@ -158,16 +181,18 @@ class _ToggleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      borderRadius: BorderRadius.circular(8),
+      borderRadius: BorderRadius.circular(radius),
       child: Container(
-        padding: const EdgeInsets.all(8),
+        width: height,
+        height: height,
+        alignment: Alignment.center,
         decoration: BoxDecoration(
           color: selected ? NexoraColors.surfaceHover : Colors.transparent,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(radius),
         ),
-        child: Icon(
+        child: FaIcon(
           icon,
-          size: 18,
+          size: 14,
           color: selected ? NexoraColors.foreground : NexoraColors.muted,
         ),
       ),

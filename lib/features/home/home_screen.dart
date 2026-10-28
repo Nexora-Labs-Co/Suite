@@ -28,7 +28,7 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
   bool _loading = true;
   bool _refreshing = false;
   String _search = '';
-  SortMode _sort = SortMode.nameAsc;
+  final SortMode _sort = SortMode.nameAsc;
   AppViewMode _view = AppViewMode.grid;
   String _syncStatus = 'Never checked';
 
@@ -202,8 +202,6 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
             NexoraActionBar(
             searchQuery: _search,
             onSearchChanged: (v) => setState(() => _search = v),
-            sortMode: _sort,
-            onSortChanged: (v) => setState(() => _sort = v),
             viewMode: _view,
             onViewModeChanged: (v) => setState(() => _view = v),
             onRefresh: _refreshing ? () {} : _refresh,
