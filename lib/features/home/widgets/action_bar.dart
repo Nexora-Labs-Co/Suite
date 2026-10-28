@@ -41,12 +41,10 @@ class NexoraActionBar extends StatelessWidget {
             onPressed: isRefreshing ? null : onRefresh,
           ),
           const SizedBox(width: 12),
-          Flexible(
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 420),
-              child: SizedBox(
-                height: _height,
-                child: TextField(
+          Expanded(
+            child: SizedBox(
+              height: _height,
+              child: TextField(
                   onChanged: onSearchChanged,
                   style: const TextStyle(fontSize: 13),
                   decoration: InputDecoration(
@@ -62,7 +60,6 @@ class NexoraActionBar extends StatelessWidget {
                 ),
               ),
             ),
-          ),
           const SizedBox(width: 12),
           _ViewToggle(
             height: _height,
