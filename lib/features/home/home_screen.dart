@@ -258,7 +258,7 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
       return ListView.separated(
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
         itemCount: apps.length,
         separatorBuilder: (_, _) => const SizedBox(height: 12),
         itemBuilder: (ctx, i) => NexoraAppCard(
@@ -270,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
       );
     }
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: const EdgeInsets.fromLTRB(20, 12, 20, 0),
       child: LayoutBuilder(
         builder: (ctx, constraints) {
           final width = constraints.maxWidth;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/models/nexora_app.dart';
@@ -39,36 +40,14 @@ class NexoraAppCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Cabecera: versión y enlace a GitHub
-                  Row(
-                    children: [
-                      Text(
-                        version != null ? 'v$version' : '—',
-                        style: const TextStyle(
-                          color: NexoraColors.mutedStrong,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      const Spacer(),
-                      TextButton(
-                        onPressed: () => _openUrl(app.resolvedGithubUrl),
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          minimumSize: const Size(0, 0),
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        ),
-                        child: const Text(
-                          'GITHUB ↗',
-                          style: TextStyle(
-                            color: NexoraColors.muted,
-                            fontSize: 11,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 0.6,
-                          ),
-                        ),
-                      ),
-                    ],
+                  // Cabecera: versión sola
+                  Text(
+                    version != null ? 'v$version' : '—',
+                    style: const TextStyle(
+                      color: NexoraColors.mutedStrong,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   const SizedBox(height: 10),
                   // Sección media: icono + nombre + subtítulo
@@ -76,22 +55,30 @@ class NexoraAppCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        width: 42,
-                        height: 42,
+                        width: 44,
+                        height: 44,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: NexoraColors.surfaceAlt,
                           borderRadius: BorderRadius.circular(10),
                           border: Border.all(color: NexoraColors.border),
                         ),
-                        child: Text(
-                          app.name.isNotEmpty ? app.name[0].toUpperCase() : '?',
-                          style: const TextStyle(
-                            color: NexoraColors.foreground,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 18,
-                          ),
-                        ),
+                        child: app.iconAsset != null
+                            ? SvgPicture.asset(
+                                app.iconAsset!,
+                                width: 30,
+                                height: 30,
+                              )
+                            : Text(
+                                app.name.isNotEmpty
+                                    ? app.name[0].toUpperCase()
+                                    : '?',
+                                style: const TextStyle(
+                                  color: NexoraColors.foreground,
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 18,
+                                ),
+                              ),
                       ),
                       const SizedBox(width: 10),
                       Expanded(
@@ -101,9 +88,10 @@ class NexoraAppCard extends StatelessWidget {
                             Text(
                               app.name,
                               style: const TextStyle(
+                                fontFamily: 'Gliker',
                                 color: NexoraColors.foreground,
                                 fontWeight: FontWeight.w700,
-                                fontSize: 15,
+                                fontSize: 16,
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
@@ -136,18 +124,8 @@ class NexoraAppCard extends StatelessWidget {
                     maxLines: 3,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  if (app.lastUpdated != null) ...[
-                    const SizedBox(height: 6),
-                    Text(
-                      'Última actualización: ${_formatDate(app.lastUpdated!)}',
-                      style: const TextStyle(
-                        color: NexoraColors.muted,
-                        fontSize: 11,
-                      ),
-                    ),
-                  ],
                   if (app.hasUpdate) ...[
-                    const SizedBox(height: 4),
+                    const SizedBox(height: 6),
                     Text(
                       'Actualización disponible: v${app.latestVersion}',
                       style: const TextStyle(
@@ -161,7 +139,18 @@ class NexoraAppCard extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(height: 10),
+          const SizedBox(height: 8),
+          if (app.lastUpdated != null)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: Text(
+                'Última actualización: ${_formatDate(app.lastUpdated!)}',
+                style: const TextStyle(
+                  color: NexoraColors.muted,
+                  fontSize: 11,
+                ),
+              ),
+            ),
           // Sección inferior: botón principal + opciones
           Row(
             children: [

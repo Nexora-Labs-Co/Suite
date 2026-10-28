@@ -11,6 +11,7 @@ class NexoraApp {
     this.subtitle,
     this.executable,
     this.iconUrl,
+    this.iconAsset,
     this.installed = false,
     this.installedVersion,
     this.latestVersion,
@@ -32,6 +33,9 @@ class NexoraApp {
 
   /// Remote icon url (optional).
   final String? iconUrl;
+
+  /// Local asset path for the app icon (optional).
+  final String? iconAsset;
 
   final bool installed;
   final String? installedVersion;
@@ -62,6 +66,7 @@ class NexoraApp {
       name: name,
       description: description,
       subtitle: subtitle,
+      iconAsset: iconAsset,
       repo: repo,
       executable: executable,
       iconUrl: iconUrl ?? this.iconUrl,
@@ -81,13 +86,12 @@ const List<NexoraApp> kNexoraApps = <NexoraApp>[
     id: 'harmony',
     name: 'Harmony',
     subtitle: 'Música y audio',
-    description:
-        'Compañero de música y audio de Nexora. Reproduce, organiza y sincroniza '
-        'tu biblioteca entre dispositivos.',
+    description: 'Tu música, tu ritmo',
     repo: 'Nexora-Labs-Co/Harmony',
     executable: 'harmony',
     installed: true,
     installedVersion: '1.4.2',
+    iconAsset: 'assets/icons/Logo-Harmony.svg',
   ),
   NexoraApp(
     id: 'nexora_studio',
