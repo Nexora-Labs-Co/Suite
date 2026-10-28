@@ -184,6 +184,19 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
       messenger.showSnackBar(
         SnackBar(content: Text('${app.name} instalado: ${result.message}')),
       );
+
+      // Self-update: restart the launcher after installing the new version.
+      if (app.id == 'nexora_launcher') {
+        await Future.delayed(const Duration(seconds: 2));
+        try {
+          await Process.start(
+            app.executable ?? 'nexora-suite',
+            const [],
+            runInShell: true,
+          );
+        } catch (_) {}
+        exit(0);
+      }
     } else {
       messenger.showSnackBar(
         SnackBar(content: Text('Error al instalar: ${result.message}')),

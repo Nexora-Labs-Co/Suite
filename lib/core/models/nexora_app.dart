@@ -90,6 +90,16 @@ const List<NexoraApp> kNexoraApps = <NexoraApp>[
     executable: 'harmony',
     installed: true,
     installedVersion: '26.10.27',
-    iconAsset: 'assets/icons/Logo-Harmony.png',
+    iconAsset: 'assets/icons/Logo-Harmony.svg',
+  ),
+  NexoraApp(
+    id: 'nexora_launcher',
+    name: 'Nexora Launcher',
+    subtitle: 'Suite de Nexora',
+    description: 'Centro de control del ecosistema Nexora',
+    repo: 'Nexora-Labs-Co/NexoraSuite',
+    executable: 'nexora-suite',
+    installed: true,
+    iconAsset: 'assets/icons/Logo-Launcher.svg',
   ),
 ];
