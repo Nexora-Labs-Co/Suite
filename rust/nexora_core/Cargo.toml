@@ -1,0 +1,11 @@
+[package]
+name = "nexora_core"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "nexora_core"
+crate-type = ["cdylib"]
+
+[dependencies]
+# Keep the core dependency-free for easy cross-compilation.
