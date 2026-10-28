@@ -9,8 +9,11 @@ class NexoraTitleBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 44,
-      color: NexoraColors.surface,
+      height: 56,
+      decoration: const BoxDecoration(
+        color: NexoraColors.surface,
+        border: Border(bottom: BorderSide(color: NexoraColors.border)),
+      ),
       child: Row(
         children: [
           Expanded(
@@ -24,7 +27,7 @@ class NexoraTitleBar extends StatelessWidget {
                       style: TextStyle(
                         fontFamily: 'Gliker',
                         fontWeight: FontWeight.w700,
-                        fontSize: 17,
+                        fontSize: 22,
                         letterSpacing: 1.2,
                         color: NexoraColors.foreground,
                       ),
