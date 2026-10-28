@@ -26,7 +26,8 @@ class NexoraAppCard extends StatelessWidget {
         : app.latestVersion;
 
     return Container(
-      padding: const EdgeInsets.all(10),
+      // Se incrementa ligeramente el padding general para darle mayor presencia
+      padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
         color: NexoraColors.surface,
         borderRadius: BorderRadius.circular(14),
@@ -40,7 +41,7 @@ class NexoraAppCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Cabecera: versión (con indicador de actualización) + GitHub
+                  // Cabecera: versión (con indicador de actualización)
                   Row(
                     children: [
                       if (app.installed && app.hasUpdate)
@@ -85,33 +86,16 @@ class NexoraAppCard extends StatelessWidget {
                           ),
                         ),
                       const Spacer(),
-                      TextButton(
-                        onPressed: () => _openUrl(app.resolvedGithubUrl),
-                        style: TextButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          minimumSize: const Size(0, 0),
-                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        ),
-                        child: const Text(
-                          'GITHUB ↗',
-                          style: TextStyle(
-                            color: NexoraColors.muted,
-                            fontSize: 10.5,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 0.6,
-                          ),
-                        ),
-                      ),
                     ],
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 10), // Espacio ligeramente mayor
                   // Sección media: icono + nombre + subtítulo
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        width: 36,
-                        height: 36,
+                        width: 42, // Icono un poco más grande
+                        height: 42,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           color: NexoraColors.surfaceAlt,
@@ -121,8 +105,8 @@ class NexoraAppCard extends StatelessWidget {
                         child: app.iconAsset != null
                             ? SvgPicture.asset(
                                 app.iconAsset!,
-                                width: 26,
-                                height: 26,
+                                width: 28,
+                                height: 28,
                               )
                             : Text(
                                 app.name.isNotEmpty
@@ -135,7 +119,7 @@ class NexoraAppCard extends StatelessWidget {
                                 ),
                               ),
                       ),
-                      const SizedBox(width: 6),
+                      const SizedBox(width: 10),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -146,18 +130,18 @@ class NexoraAppCard extends StatelessWidget {
                                 fontFamily: 'Gliker',
                                 color: NexoraColors.foreground,
                                 fontWeight: FontWeight.w700,
-                                fontSize: 16,
+                                fontSize: 16.5,
                               ),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                             if (app.subtitle != null) ...[
-                              const SizedBox(height: 2),
+                              const SizedBox(height: 3),
                               Text(
                                 app.subtitle!,
                                 style: const TextStyle(
                                   color: NexoraColors.muted,
-                                  fontSize: 11.5,
+                                  fontSize: 12,
                                 ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
@@ -168,29 +152,26 @@ class NexoraAppCard extends StatelessWidget {
                       ),
                     ],
                   ),
-
                 ],
               ),
             ),
           ),
-          const SizedBox(height: 2),
+          const SizedBox(height: 6),
           if (app.lastUpdated != null)
             Padding(
-              padding: const EdgeInsets.only(bottom: 2),
+              padding: const EdgeInsets.only(bottom: 8),
               child: Text(
                 'Última actualización: ${_formatDate(app.lastUpdated!)}',
                 style: const TextStyle(
                   color: NexoraColors.muted,
-                  fontSize: 11,
+                  fontSize: 11.5,
                 ),
               ),
             ),
           // Sección inferior: botón principal + opciones
           Row(
             children: [
-              Expanded(
-                child: _primaryButton(),
-              ),
+              Expanded(child: _primaryButton()),
               const SizedBox(width: 8),
               _optionsButton(context),
             ],
@@ -208,15 +189,9 @@ class NexoraAppCard extends StatelessWidget {
           child: const Text('ACTUALIZAR'),
         );
       }
-      return ElevatedButton(
-        onPressed: onOpen,
-        child: const Text('ABRIR'),
-      );
+      return ElevatedButton(onPressed: onOpen, child: const Text('ABRIR'));
     }
-    return OutlinedButton(
-      onPressed: onInstall,
-      child: const Text('INSTALAR'),
-    );
+    return OutlinedButton(onPressed: onInstall, child: const Text('INSTALAR'));
   }
 
   Widget _optionsButton(BuildContext context) {
@@ -232,10 +207,16 @@ class NexoraAppCard extends StatelessWidget {
         icon: const Icon(Icons.more_horiz, size: 18, color: NexoraColors.muted),
         onSelected: (v) => _handleMenu(v, context),
         itemBuilder: (_) => [
-          const PopupMenuItem(value: 'refresh', child: Text('Comprobar actualizaciones')),
+          const PopupMenuItem(
+            value: 'refresh',
+            child: Text('Comprobar actualizaciones'),
+          ),
           const PopupMenuItem(value: 'github', child: Text('Ver en GitHub')),
           if (app.installed) ...[
-            const PopupMenuItem(value: 'folder', child: Text('Abrir carpeta de instalación')),
+            const PopupMenuItem(
+              value: 'folder',
+              child: Text('Abrir carpeta de instalación'),
+            ),
             const PopupMenuItem(value: 'reinstall', child: Text('Reinstalar')),
             const PopupMenuItem(value: 'uninstall', child: Text('Desinstalar')),
           ],
@@ -266,8 +247,18 @@ class NexoraAppCard extends StatelessWidget {
 
   String _formatDate(DateTime d) {
     const months = [
-      'ene', 'feb', 'mar', 'abr', 'may', 'jun',
-      'jul', 'ago', 'sep', 'oct', 'nov', 'dic',
+      'ene',
+      'feb',
+      'mar',
+      'abr',
+      'may',
+      'jun',
+      'jul',
+      'ago',
+      'sep',
+      'oct',
+      'nov',
+      'dic',
     ];
     return '${d.day} de ${months[d.month - 1]}. de ${d.year}';
   }

@@ -126,7 +126,8 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
     return list;
   }
 
-  List<NexoraApp> get _installed => _filtered.where((a) => a.installed).toList();
+  List<NexoraApp> get _installed =>
+      _filtered.where((a) => a.installed).toList();
   List<NexoraApp> get _notInstalled =>
       _filtered.where((a) => !a.installed).toList();
 
@@ -200,21 +201,21 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
           children: [
             const NexoraTitleBar(),
             NexoraActionBar(
-            searchQuery: _search,
-            onSearchChanged: (v) => setState(() => _search = v),
-            viewMode: _view,
-            onViewModeChanged: (v) => setState(() => _view = v),
-            onRefresh: _refreshing ? () {} : _refresh,
-            isRefreshing: _refreshing,
-          ),
-          Expanded(
-            child: _loading
-                ? const Center(child: CircularProgressIndicator())
-                : _buildContent(),
-          ),
-          NexoraFooter(syncStatus: _syncStatus),
-        ],
-      ),
+              searchQuery: _search,
+              onSearchChanged: (v) => setState(() => _search = v),
+              viewMode: _view,
+              onViewModeChanged: (v) => setState(() => _view = v),
+              onRefresh: _refreshing ? () {} : _refresh,
+              isRefreshing: _refreshing,
+            ),
+            Expanded(
+              child: _loading
+                  ? const Center(child: CircularProgressIndicator())
+                  : _buildContent(),
+            ),
+            NexoraFooter(syncStatus: _syncStatus),
+          ],
+        ),
       ),
     );
   }
@@ -282,7 +283,7 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
               crossAxisCount: cross,
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
-              mainAxisExtent: 150,
+              mainAxisExtent: 200,
             ),
             itemCount: apps.length,
             itemBuilder: (ctx, i) => NexoraAppCard(
@@ -296,5 +297,4 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
       ),
     );
   }
-
 }

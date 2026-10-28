@@ -89,8 +89,7 @@ const List<NexoraApp> kNexoraApps = <NexoraApp>[
     repo: 'Nexora-Labs-Co/Harmony',
     executable: 'harmony',
     installed: true,
-    installedVersion: '1.4.2',
-    iconAsset: 'assets/icons/Logo-Harmony.svg',
+    installedVersion: '26.10.27',
+    iconAsset: 'assets/icons/Logo-Harmony.png',
   ),
 ];
-
