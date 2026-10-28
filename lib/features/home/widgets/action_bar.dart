@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:nexora_ui_kit/nexora_ui_kit.dart' as kit;
 
-import '../../../core/models/nexora_app.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/models/nexora_app.dart';
 
 class NexoraActionBar extends StatelessWidget {
   const NexoraActionBar({
@@ -13,6 +14,8 @@ class NexoraActionBar extends StatelessWidget {
     required this.onViewModeChanged,
     required this.onRefresh,
     required this.isRefreshing,
+    this.hasPendingUpdates = false,
+    this.onInstallAll,
   });
 
   final String searchQuery;
@@ -21,18 +24,18 @@ class NexoraActionBar extends StatelessWidget {
   final ValueChanged<AppViewMode> onViewModeChanged;
   final VoidCallback onRefresh;
   final bool isRefreshing;
+  final bool hasPendingUpdates;
+  final VoidCallback? onInstallAll;
 
   static const double _height = 40;
   static const double _radius = 8;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return kit.NexoraActionBar(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      decoration: const BoxDecoration(
-        border: Border(bottom: BorderSide(color: NexoraColors.border)),
-      ),
-      child: Row(
+      left: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           _RefreshButton(
             height: _height,
@@ -40,29 +43,36 @@ class NexoraActionBar extends StatelessWidget {
             isRefreshing: isRefreshing,
             onPressed: isRefreshing ? null : onRefresh,
           ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: SizedBox(
+          if (hasPendingUpdates && onInstallAll != null) ...[
+            const SizedBox(width: 8),
+            SizedBox(
               height: _height,
-              child: TextField(
-                  onChanged: onSearchChanged,
-                  style: const TextStyle(fontSize: 13),
-                  decoration: const InputDecoration(
-                    hintText: 'Buscar aplicaciones...',
-                    isDense: true,
-                    contentPadding: EdgeInsets.symmetric(vertical: 12),
-                  ),
-                ),
+              child: ElevatedButton.icon(
+                onPressed: onInstallAll,
+                icon: const FaIcon(FontAwesomeIcons.download, size: 13),
+                label: const Text('Instalar todo'),
               ),
             ),
-          const SizedBox(width: 12),
-          _ViewToggle(
-            height: _height,
-            radius: _radius,
-            value: viewMode,
-            onChanged: onViewModeChanged,
-          ),
+          ],
         ],
+      ),
+      center: SizedBox(
+        height: _height,
+        child: TextField(
+          onChanged: onSearchChanged,
+          style: const TextStyle(fontSize: 13),
+          decoration: const InputDecoration(
+            hintText: 'Buscar aplicaciones...',
+            isDense: true,
+            contentPadding: EdgeInsets.symmetric(vertical: 12),
+          ),
+        ),
+      ),
+      right: _ViewToggle(
+        height: _height,
+        radius: _radius,
+        value: viewMode,
+        onChanged: onViewModeChanged,
       ),
     );
   }

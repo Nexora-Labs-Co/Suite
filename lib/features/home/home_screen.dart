@@ -12,7 +12,7 @@ import '../../core/theme/app_theme.dart';
 import 'widgets/action_bar.dart';
 import 'widgets/app_card.dart';
 import 'widgets/section_header.dart';
-import 'package:nexora_ui_kit/nexora_ui_kit.dart' hide NexoraColors;
+import 'package:nexora_ui_kit/nexora_ui_kit.dart' hide NexoraColors, NexoraActionBar;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
