@@ -212,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
       child: Scaffold(
         body: Column(
           children: [
-            const NexoraWindowHeader(subtitle: 'SUITE', version: 'v26.10.27+4'),
+            const NexoraWindowHeader(subtitle: 'SUITE'),
             NexoraActionBar(
               searchQuery: _search,
               onSearchChanged: (v) => setState(() => _search = v),
