@@ -210,6 +210,7 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
     final radius = _maximized ? 0.0 : 14.0;
     return ClipRRect(
       borderRadius: BorderRadius.circular(radius),
+      clipBehavior: Clip.antiAlias,
       child: Scaffold(
         body: Column(
           children: [
