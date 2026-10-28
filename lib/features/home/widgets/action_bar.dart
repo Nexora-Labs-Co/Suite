@@ -37,12 +37,19 @@ class NexoraActionBar extends StatelessWidget {
       left: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          _RefreshButton(
-            height: _height,
-            radius: _radius,
-            isRefreshing: isRefreshing,
-            onPressed: isRefreshing ? null : onRefresh,
-          ),
+          isRefreshing
+              ? const SizedBox(
+                  width: 20,
+                  height: 20,
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                )
+              : IconButton(
+                  iconSize: 18,
+                  padding: const EdgeInsets.all(8),
+                  icon: const FaIcon(FontAwesomeIcons.arrowsRotate),
+                  color: NexoraColors.foreground,
+                  onPressed: isRefreshing ? null : onRefresh,
+                ),
           if (hasPendingUpdates && onInstallAll != null) ...[
             const SizedBox(width: 8),
             SizedBox(
@@ -63,6 +70,10 @@ class NexoraActionBar extends StatelessWidget {
           style: const TextStyle(fontSize: 13, color: NexoraColors.foreground),
           decoration: InputDecoration(
             hintText: 'Buscar aplicaciones...',
+            prefixIcon: const Padding(
+              padding: EdgeInsets.all(10),
+              child: Icon(Icons.search, size: 18, color: NexoraColors.muted),
+            ),
             isDense: true,
             filled: true,
             fillColor: NexoraColors.surfaceAlt,
