@@ -45,8 +45,7 @@ class NexoraApp {
   final String? githubUrl;
   final String? homepageUrl;
 
-  String get resolvedGithubUrl =>
-      githubUrl ?? 'https://github.com/$repo';
+  String get resolvedGithubUrl => githubUrl ?? 'https://github.com/$repo';
 
   bool get hasUpdate {
     if (!installed) return false;
@@ -93,47 +92,5 @@ const List<NexoraApp> kNexoraApps = <NexoraApp>[
     installedVersion: '1.4.2',
     iconAsset: 'assets/icons/Logo-Harmony.svg',
   ),
-  NexoraApp(
-    id: 'nexora_studio',
-    name: 'Nexora Studio',
-    subtitle: 'Espacio creativo',
-    description:
-        'Espacio de trabajo creativo y ligero para notas, bocetos y prototipos rápidos.',
-    repo: 'Nexora-Labs-Co/NexoraStudio',
-    executable: 'nexora-studio',
-  ),
-  NexoraApp(
-    id: 'nexora_sync',
-    name: 'Nexora Sync',
-    subtitle: 'Sincronización',
-    description:
-        'Agente de sincronización en segundo plano que mantiene tus datos de Nexora '
-        'consistentes en todas partes.',
-    repo: 'Nexora-Labs-Co/NexoraSync',
-    executable: 'nexora-sync',
-  ),
-  NexoraApp(
-    id: 'nexora_notes',
-    name: 'Nexora Notes',
-    subtitle: 'Notas rápidas',
-    description: 'Toma de notas minimalista y rápida con almacenamiento offline.',
-    repo: 'Nexora-Labs-Co/NexoraNotes',
-    executable: 'nexora-notes',
-  ),
-  NexoraApp(
-    id: 'nexora_vault',
-    name: 'Nexora Vault',
-    subtitle: 'Gestor de secretos',
-    description: 'Gestor cifrado de credenciales y secretos para la suite Nexora.',
-    repo: 'Nexora-Labs-Co/NexoraVault',
-    executable: 'nexora-vault',
-  ),
-  NexoraApp(
-    id: 'nexora_term',
-    name: 'Nexora Term',
-    subtitle: 'Terminal',
-    description: 'Emulador de terminal optimizado para el flujo de trabajo de Nexora.',
-    repo: 'Nexora-Labs-Co/NexoraTerm',
-    executable: 'nexora-term',
-  ),
 ];
+

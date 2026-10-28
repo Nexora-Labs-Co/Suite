@@ -40,49 +40,71 @@ class NexoraAppCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Cabecera: versión (con indicador de actualización)
-                  if (app.installed && app.hasUpdate)
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
+                  // Cabecera: versión (con indicador de actualización) + GitHub
+                  Row(
+                    children: [
+                      if (app.installed && app.hasUpdate)
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              app.installedVersion ?? '—',
+                              style: const TextStyle(
+                                color: Color(0xFFE53935),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            const Text(
+                              '->',
+                              style: TextStyle(
+                                color: NexoraColors.muted,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              app.latestVersion ?? '—',
+                              style: const TextStyle(
+                                color: Color(0xFF43A047),
+                                fontSize: 12,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        )
+                      else
                         Text(
-                          app.installedVersion ?? '—',
+                          version ?? '—',
                           style: const TextStyle(
-                            color: Color(0xFFE53935),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                        const SizedBox(width: 6),
-                        const Text(
-                          '->',
-                          style: TextStyle(
-                            color: NexoraColors.muted,
+                            color: NexoraColors.mutedStrong,
                             fontSize: 12,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        const SizedBox(width: 6),
-                        Text(
-                          app.latestVersion ?? '—',
-                          style: const TextStyle(
-                            color: Color(0xFF43A047),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w700,
+                      const Spacer(),
+                      TextButton(
+                        onPressed: () => _openUrl(app.resolvedGithubUrl),
+                        style: TextButton.styleFrom(
+                          padding: EdgeInsets.zero,
+                          minimumSize: const Size(0, 0),
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        child: const Text(
+                          'GITHUB ↗',
+                          style: TextStyle(
+                            color: NexoraColors.muted,
+                            fontSize: 10.5,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.6,
                           ),
                         ),
-                      ],
-                    )
-                  else
-                    Text(
-                      version ?? '—',
-                      style: const TextStyle(
-                        color: NexoraColors.mutedStrong,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
                       ),
-                    ),
-                  const SizedBox(height: 4),
+                    ],
+                  ),
+                  const SizedBox(height: 6),
                   // Sección media: icono + nombre + subtítulo
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
