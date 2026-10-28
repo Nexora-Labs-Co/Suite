@@ -50,7 +50,7 @@ class NexoraActionBar extends StatelessWidget {
                   decoration: const InputDecoration(
                     hintText: 'Search apps...',
                     isDense: true,
-                    contentPadding: EdgeInsets.symmetric(vertical: 10),
+                    contentPadding: EdgeInsets.symmetric(vertical: 12),
                   ),
                 ),
               ),
