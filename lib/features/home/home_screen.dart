@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
   String _search = '';
   final SortMode _sort = SortMode.nameAsc;
   AppViewMode _view = AppViewMode.grid;
-  String _syncStatus = 'Never checked';
+  String _syncStatus = 'Nunca comprobado';
 
   bool _maximized = false;
 
@@ -77,7 +77,7 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
     setState(() {
       _apps = apps;
       _loading = false;
-      _syncStatus = 'Checked just now';
+      _syncStatus = 'Comprobado ahora mismo';
     });
   }
 
@@ -92,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
     setState(() {
       _apps = updated;
       _refreshing = false;
-      _syncStatus = 'Checked just now';
+      _syncStatus = 'Comprobado ahora mismo';
     });
   }
 
@@ -143,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
     } catch (e) {
       if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Could not open ${app.name}: $e')),
+        SnackBar(content: Text('No se pudo abrir ${app.name}: $e')),
       );
     }
   }
@@ -151,13 +151,13 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
   Future<void> _installApp(NexoraApp app) async {
     final messenger = ScaffoldMessenger.of(context);
     messenger.showSnackBar(
-      SnackBar(content: Text('Fetching ${app.name} release...')),
+      SnackBar(content: Text('Obteniendo versión de ${app.name}...')),
     );
 
     final release = await _catalog.fetchRelease(app.repo);
     if (release == null) {
       messenger.showSnackBar(
-        SnackBar(content: Text('Could not find a release for ${app.name}.')),
+        SnackBar(content: Text('No se encontró una versión para ${app.name}.')),
       );
       return;
     }
@@ -169,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
     _updateApp(refreshed);
 
     messenger.showSnackBar(
-      SnackBar(content: Text('Installing ${app.name} ${release.version}...')),
+      SnackBar(content: Text('Instalando ${app.name} ${release.version}...')),
     );
 
     final result = await _installer.install(refreshed, release);
@@ -181,11 +181,11 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
       );
       _updateApp(installed);
       messenger.showSnackBar(
-        SnackBar(content: Text('${app.name} installed: ${result.message}')),
+        SnackBar(content: Text('${app.name} instalado: ${result.message}')),
       );
     } else {
       messenger.showSnackBar(
-        SnackBar(content: Text('Install failed: ${result.message}')),
+        SnackBar(content: Text('Error al instalar: ${result.message}')),
       );
     }
   }
@@ -228,22 +228,19 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SectionHeader(
-            title: 'Installed',
-            subtitle: '${installed.length} app(s) on this device',
-          ),
           _buildGrid(installed, installedSection: true),
-          SectionHeader(
-            title: 'Not Installed',
-            subtitle: '${notInstalled.length} available',
-          ),
+          if (notInstalled.isNotEmpty)
+            SectionHeader(
+              title: 'No instaladas',
+              subtitle: '${notInstalled.length} disponibles',
+            ),
           _buildGrid(notInstalled, installedSection: false),
           if (installed.isEmpty && notInstalled.isEmpty)
             const Padding(
               padding: EdgeInsets.all(40),
               child: Center(
                 child: Text(
-                  'No apps match your search.',
+                  'No hay aplicaciones que coincidan con tu búsqueda.',
                   style: TextStyle(color: NexoraColors.muted),
                 ),
               ),
@@ -269,7 +266,6 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
           onOpen: () => _openApp(apps[i]),
           onInstall: () => _installApp(apps[i]),
           onRefresh: () => _refresh(),
-          compact: true,
         ),
       );
     }

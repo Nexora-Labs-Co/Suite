@@ -29,7 +29,7 @@ class NexoraFooter extends StatelessWidget {
             style: const TextStyle(color: NexoraColors.muted, fontSize: 11.5),
           ),
           const Spacer(),
-          _FooterLink(label: 'Nexora API', url: 'https://api.nexora.dev'),
+          _FooterLink(label: 'API de Nexora', url: 'https://api.nexora.dev'),
           const SizedBox(width: 16),
           _FooterLink(label: 'GitHub', url: 'https://github.com/Nexora-Labs-Co'),
         ],

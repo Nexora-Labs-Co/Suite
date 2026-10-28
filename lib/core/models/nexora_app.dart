@@ -8,6 +8,7 @@ class NexoraApp {
     required this.name,
     required this.description,
     required this.repo,
+    this.subtitle,
     this.executable,
     this.iconUrl,
     this.installed = false,
@@ -21,6 +22,7 @@ class NexoraApp {
   final String id;
   final String name;
   final String description;
+  final String? subtitle;
 
   /// GitHub repository in "owner/repo" form.
   final String repo;
@@ -59,6 +61,7 @@ class NexoraApp {
       id: id,
       name: name,
       description: description,
+      subtitle: subtitle,
       repo: repo,
       executable: executable,
       iconUrl: iconUrl ?? this.iconUrl,
@@ -77,9 +80,10 @@ const List<NexoraApp> kNexoraApps = <NexoraApp>[
   NexoraApp(
     id: 'harmony',
     name: 'Harmony',
+    subtitle: 'Música y audio',
     description:
-        'Nexora music & audio companion. Stream, organise and sync your library '
-        'across devices.',
+        'Compañero de música y audio de Nexora. Reproduce, organiza y sincroniza '
+        'tu biblioteca entre dispositivos.',
     repo: 'Nexora-Labs-Co/Harmony',
     executable: 'harmony',
     installed: true,
@@ -88,37 +92,43 @@ const List<NexoraApp> kNexoraApps = <NexoraApp>[
   NexoraApp(
     id: 'nexora_studio',
     name: 'Nexora Studio',
+    subtitle: 'Espacio creativo',
     description:
-        'Lightweight creative workspace for notes, sketches and quick prototypes.',
+        'Espacio de trabajo creativo y ligero para notas, bocetos y prototipos rápidos.',
     repo: 'Nexora-Labs-Co/NexoraStudio',
     executable: 'nexora-studio',
   ),
   NexoraApp(
     id: 'nexora_sync',
     name: 'Nexora Sync',
+    subtitle: 'Sincronización',
     description:
-        'Background sync agent keeping your Nexora data consistent everywhere.',
+        'Agente de sincronización en segundo plano que mantiene tus datos de Nexora '
+        'consistentes en todas partes.',
     repo: 'Nexora-Labs-Co/NexoraSync',
     executable: 'nexora-sync',
   ),
   NexoraApp(
     id: 'nexora_notes',
     name: 'Nexora Notes',
-    description: 'Minimal, fast note taking with offline-first storage.',
+    subtitle: 'Notas rápidas',
+    description: 'Toma de notas minimalista y rápida con almacenamiento offline.',
     repo: 'Nexora-Labs-Co/NexoraNotes',
     executable: 'nexora-notes',
   ),
   NexoraApp(
     id: 'nexora_vault',
     name: 'Nexora Vault',
-    description: 'Encrypted credential and secret manager for the Nexora suite.',
+    subtitle: 'Gestor de secretos',
+    description: 'Gestor cifrado de credenciales y secretos para la suite Nexora.',
     repo: 'Nexora-Labs-Co/NexoraVault',
     executable: 'nexora-vault',
   ),
   NexoraApp(
     id: 'nexora_term',
     name: 'Nexora Term',
-    description: 'Terminal emulator tuned for the Nexora developer workflow.',
+    subtitle: 'Terminal',
+    description: 'Emulador de terminal optimizado para el flujo de trabajo de Nexora.',
     repo: 'Nexora-Labs-Co/NexoraTerm',
     executable: 'nexora-term',
   ),

@@ -48,7 +48,7 @@ class NexoraActionBar extends StatelessWidget {
                   onChanged: onSearchChanged,
                   style: const TextStyle(fontSize: 13),
                   decoration: const InputDecoration(
-                    hintText: 'Search apps...',
+                    hintText: 'Buscar aplicaciones...',
                     isDense: true,
                     contentPadding: EdgeInsets.symmetric(vertical: 12),
                   ),
