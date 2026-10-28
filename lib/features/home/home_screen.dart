@@ -11,7 +11,7 @@ import 'widgets/action_bar.dart';
 import 'widgets/app_card.dart';
 import 'widgets/footer.dart';
 import 'widgets/section_header.dart';
-import 'widgets/title_bar.dart';
+import 'package:nexora_ui_kit/nexora_ui_kit.dart' hide NexoraColors;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -212,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
       child: Scaffold(
         body: Column(
           children: [
-            const NexoraTitleBar(),
+            const NexoraWindowHeader(subtitle: 'SUITE'),
             NexoraActionBar(
               searchQuery: _search,
               onSearchChanged: (v) => setState(() => _search = v),
