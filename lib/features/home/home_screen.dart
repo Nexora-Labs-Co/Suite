@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:window_manager/window_manager.dart';
 
 import '../../core/models/nexora_app.dart';
@@ -9,7 +11,6 @@ import '../../core/services/installer_service.dart';
 import '../../core/theme/app_theme.dart';
 import 'widgets/action_bar.dart';
 import 'widgets/app_card.dart';
-import 'widgets/footer.dart';
 import 'widgets/section_header.dart';
 import 'package:nexora_ui_kit/nexora_ui_kit.dart' hide NexoraColors;
 
@@ -226,7 +227,37 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
                   ? const Center(child: CircularProgressIndicator())
                   : _buildContent(),
             ),
-            NexoraFooter(syncStatus: _syncStatus),
+            NexoraFooterBar(
+              left: Text(
+                '$_syncStatus · v26.10.27+4',
+                style: const TextStyle(color: NexoraColors.muted, fontSize: 11.5),
+              ),
+              right: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  IconButton(
+                    icon: const FaIcon(FontAwesomeIcons.github, size: 16),
+                    color: NexoraColors.mutedStrong,
+                    onPressed: () async {
+                      final uri = Uri.parse('https://github.com/Nexora-Labs-Co');
+                      if (await canLaunchUrl(uri)) {
+                        await launchUrl(uri, mode: LaunchMode.externalApplication);
+                      }
+                    },
+                  ),
+                  IconButton(
+                    icon: const FaIcon(FontAwesomeIcons.xTwitter, size: 16),
+                    color: NexoraColors.mutedStrong,
+                    onPressed: () async {
+                      final uri = Uri.parse('https://x.com');
+                      if (await canLaunchUrl(uri)) {
+                        await launchUrl(uri, mode: LaunchMode.externalApplication);
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
