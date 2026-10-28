@@ -60,11 +60,26 @@ class NexoraActionBar extends StatelessWidget {
         height: _height,
         child: TextField(
           onChanged: onSearchChanged,
-          style: const TextStyle(fontSize: 13),
-          decoration: const InputDecoration(
+          style: const TextStyle(fontSize: 13, color: NexoraColors.foreground),
+          decoration: InputDecoration(
             hintText: 'Buscar aplicaciones...',
             isDense: true,
-            contentPadding: EdgeInsets.symmetric(vertical: 12),
+            filled: true,
+            fillColor: NexoraColors.surfaceAlt,
+            hintStyle: TextStyle(color: NexoraColors.muted, fontSize: 13),
+            contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: NexoraColors.border),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: NexoraColors.border),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: NexoraColors.foreground),
+            ),
           ),
         ),
       ),
