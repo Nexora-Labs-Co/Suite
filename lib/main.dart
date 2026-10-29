@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'app.dart';
+import 'core/services/startup_cleanup.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await StartupCleanup.run();
   await windowManager.ensureInitialized();
   await windowManager.setBackgroundColor(Colors.transparent);
 
