@@ -22,6 +22,15 @@ El formato de este registro está basado en [Keep a Changelog](https://keepachan
 
 ---
 
+## [26.10.28]
+
+### Añadido
+- Integración de `NexoraWindowHeader` y `NexoraFooterBar` desde NexoraUi-Kit.
+
+### Cambiado
+- Barra superior y footer unificados con el kit compartido.
+
+---
 ## [Sin publicar]
 
 ### Añadido
