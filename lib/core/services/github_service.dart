@@ -22,6 +22,7 @@ class GithubRelease {
     required this.publishedAt,
     required this.htmlUrl,
     required this.assets,
+    this.body,
   });
 
   final String tagName;
@@ -29,6 +30,9 @@ class GithubRelease {
   final DateTime? publishedAt;
   final String htmlUrl;
   final List<GithubAsset> assets;
+  final String? body;
+
+  int get totalSize => assets.fold<int>(0, (s, a) => s + a.size);
 
   String get version => tagName.replaceFirst(RegExp(r'^v'), '');
 
@@ -93,9 +97,12 @@ class GithubService {
       return GithubRelease(
         tagName: json['tag_name'] as String? ?? '',
         name: json['name'] as String? ?? '',
-        publishedAt: DateTime.tryParse(json['published_at'] as String? ?? ''),
+        publishedAt: json['published_at'] != null
+            ? DateTime.tryParse(json['published_at'] as String)
+            : null,
         htmlUrl: json['html_url'] as String? ?? '',
         assets: assets,
+        body: json['body'] as String?,
       );
     } catch (_) {
       return null;

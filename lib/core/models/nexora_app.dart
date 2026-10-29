@@ -16,6 +16,8 @@ class NexoraApp {
     this.installedVersion,
     this.latestVersion,
     this.lastUpdated,
+    this.latestReleaseBody,
+    this.latestReleaseSize,
     this.githubUrl,
     this.homepageUrl,
   });
@@ -42,6 +44,9 @@ class NexoraApp {
   final String? latestVersion;
   final DateTime? lastUpdated;
 
+  final String? latestReleaseBody;
+  final int? latestReleaseSize;
+
   final String? githubUrl;
   final String? homepageUrl;
 
@@ -58,6 +63,8 @@ class NexoraApp {
     String? installedVersion,
     String? latestVersion,
     DateTime? lastUpdated,
+    String? latestReleaseBody,
+    int? latestReleaseSize,
     String? iconUrl,
   }) {
     return NexoraApp(
@@ -73,6 +80,8 @@ class NexoraApp {
       installedVersion: installedVersion ?? this.installedVersion,
       latestVersion: latestVersion ?? this.latestVersion,
       lastUpdated: lastUpdated ?? this.lastUpdated,
+      latestReleaseBody: latestReleaseBody ?? this.latestReleaseBody,
+      latestReleaseSize: latestReleaseSize ?? this.latestReleaseSize,
       githubUrl: githubUrl,
       homepageUrl: homepageUrl,
     );

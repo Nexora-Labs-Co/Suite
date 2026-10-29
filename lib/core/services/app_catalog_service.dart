@@ -39,6 +39,8 @@ class AppCatalogService {
           next = next.copyWith(
             latestVersion: release.version,
             lastUpdated: release.publishedAt,
+            latestReleaseBody: release.body,
+            latestReleaseSize: release.totalSize,
           );
         }
       } catch (e) {
@@ -93,6 +95,8 @@ class AppCatalogService {
     return app.copyWith(
       latestVersion: release.version,
       lastUpdated: release.publishedAt,
+      latestReleaseBody: release.body,
+      latestReleaseSize: release.totalSize,
     );
   }
 
