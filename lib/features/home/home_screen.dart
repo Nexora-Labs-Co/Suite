@@ -11,7 +11,9 @@ import '../../core/services/installer_service.dart';
 import '../../core/theme/app_theme.dart';
 import 'widgets/action_bar.dart';
 import 'widgets/app_card.dart';
+import 'widgets/app_detail_view.dart';
 import 'widgets/section_header.dart';
+import 'widgets/suite_app_sidebar.dart';
 import 'package:nexora_ui_kit/nexora_ui_kit.dart' hide NexoraColors, NexoraActionBar;
 
 class HomeScreen extends StatefulWidget {
@@ -26,9 +28,12 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
   final InstallerService _installer = InstallerService();
 
   List<NexoraApp> _apps = const [];
+  String? _selectedAppId;
   bool _loading = true;
+  bool _leftSidebarCollapsed = false;
+  bool _rightSidebarCollapsed = true;
   bool _refreshing = false;
-  String _search = '';
+  final String _search = '';
   final SortMode _sort = SortMode.nameAsc;
   AppViewMode _view = AppViewMode.grid;
   String _syncStatus = 'Nunca comprobado';
@@ -79,6 +84,9 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
       _apps = apps;
       _loading = false;
       _syncStatus = 'Comprobado ahora mismo';
+      if (_selectedAppId == null && apps.isNotEmpty) {
+        _selectedAppId = apps.first.id;
+      }
     });
   }
 
@@ -131,6 +139,14 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
       _filtered.where((a) => a.installed).toList();
   List<NexoraApp> get _notInstalled =>
       _filtered.where((a) => !a.installed).toList();
+
+  NexoraApp? get _selectedApp {
+    if (_selectedAppId == null) return null;
+    for (final a in _apps) {
+      if (a.id == _selectedAppId) return a;
+    }
+    return null;
+  }
 
   void _updateApp(NexoraApp updated) {
     setState(() {
@@ -216,17 +232,59 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
           children: [
             const NexoraWindowHeader(subtitle: 'SUITE'),
             NexoraActionBar(
-              searchQuery: _search,
-              onSearchChanged: (v) => setState(() => _search = v),
               viewMode: _view,
               onViewModeChanged: (v) => setState(() => _view = v),
               onRefresh: _refreshing ? () {} : _refresh,
               isRefreshing: _refreshing,
+              onToggleLeftSidebar: () =>
+                  setState(() => _leftSidebarCollapsed = !_leftSidebarCollapsed),
+              onToggleRightSidebar: () =>
+                  setState(() => _rightSidebarCollapsed = !_rightSidebarCollapsed),
             ),
             Expanded(
               child: _loading
                   ? const Center(child: CircularProgressIndicator())
-                  : _buildContent(),
+                  : NexoraSidebarLayout(
+                      sidebarWidth: 260,
+                      sidebarCollapsed: _leftSidebarCollapsed,
+                      sidebarCollapsedWidth: 0,
+                      sidebar: SuiteAppSidebar(
+                        apps: _apps,
+                        searchQuery: _search,
+                        selectedId: _selectedAppId,
+                        onSelected: (id) =>
+                            setState(() => _selectedAppId = id),
+                      ),
+                      body: Row(
+                        children: [
+                          Expanded(
+                            child: _selectedApp != null
+                                ? AppDetailView(
+                                    app: _selectedApp!,
+                                    onOpen: () => _openApp(_selectedApp!),
+                                    onInstall: () => _installApp(_selectedApp!),
+                                    onRefresh: _refresh,
+                                  )
+                                : _buildContent(),
+                          ),
+                          if (!_rightSidebarCollapsed)
+                            Container(
+                              width: 260,
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  left: BorderSide(color: NexoraColors.border),
+                                ),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  'Panel derecho',
+                                  style: TextStyle(color: NexoraColors.muted),
+                                ),
+                              ),
+                            ),
+                        ],
+                      ),
+                    ),
             ),
             NexoraFooterBar(
               left: Text(
