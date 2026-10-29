@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../core/models/nexora_app.dart';
 import '../../../core/theme/app_theme.dart';
 
-/// Sidebar listing every ecosystem app with selection state.
+/// Sidebar listing every ecosystem app as square icon cards,
+/// mirroring Harmony's sidebar grid (single column).
 class SuiteAppSidebar extends StatelessWidget {
   const SuiteAppSidebar({
     super.key,
@@ -33,114 +34,87 @@ class SuiteAppSidebar extends StatelessWidget {
   Widget build(BuildContext context) {
     final list = _filtered;
     if (list.isEmpty) {
-      return Padding(
-        padding: const EdgeInsets.all(12),
+      return const Center(
         child: Text(
           'Sin resultados',
-          style: TextStyle(color: NexoraColors.muted, fontSize: 13),
+          style: TextStyle(color: NexoraColors.muted, fontSize: 12),
         ),
       );
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        for (final app in list)
-          _SidebarItem(
-            app: app,
-            selected: app.id == selectedId,
-            onTap: () => onSelected(app.id),
+        const SizedBox(height: 16),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: GridView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing: 8,
+              crossAxisSpacing: 8,
+              childAspectRatio: 1.0,
+            ),
+            itemCount: list.length,
+            itemBuilder: (context, index) {
+              final app = list[index];
+              return _gridTile(
+                assetPath: app.iconAsset,
+                selected: app.id == selectedId,
+                onTap: () => onSelected(app.id),
+              );
+            },
           ),
+        ),
       ],
     );
   }
-}
 
-class _SidebarItem extends StatelessWidget {
-  const _SidebarItem({
-    required this.app,
-    required this.selected,
-    required this.onTap,
-  });
-
-  final NexoraApp app;
-  final bool selected;
-  final VoidCallback onTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 8),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(10),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 150),
-          padding: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: selected ? NexoraColors.surfaceHover : NexoraColors.surface,
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(
-              color: selected ? NexoraColors.foreground : NexoraColors.border,
-            ),
-          ),
-          child: Row(
-            children: [
-              Container(
-                width: 36,
-                height: 36,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  color: NexoraColors.surfaceAlt,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: NexoraColors.border),
-                ),
-                child: app.iconAsset != null
-                    ? SvgPicture.asset(app.iconAsset!, width: 22, height: 22)
-                    : Text(
-                        app.name.isNotEmpty ? app.name[0].toUpperCase() : '?',
-                        style: const TextStyle(
-                          color: NexoraColors.foreground,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-              ),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      app.name,
-                      style: TextStyle(
-                        color: NexoraColors.foreground,
-                        fontWeight: FontWeight.w700,
-                        fontSize: 13.5,
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    if (app.subtitle != null) ...[
-                      const SizedBox(height: 2),
-                      Text(
-                        app.subtitle!,
-                        style: TextStyle(color: NexoraColors.muted, fontSize: 11),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                    ],
-                  ],
-                ),
-              ),
-              if (app.installed)
-                Container(
-                  width: 8,
-                  height: 8,
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF43A047),
-                    shape: BoxShape.circle,
+  Widget _gridTile({
+    String? assetPath,
+    required bool selected,
+    required VoidCallback onTap,
+  }) {
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(8),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        curve: Curves.easeOut,
+        transform: Matrix4.translationValues(0, selected ? -3 : 0, 0),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: selected
+              ? const [
+                  BoxShadow(
+                    color: Color(0x33000000),
+                    blurRadius: 8,
+                    offset: Offset(0, 4),
                   ),
-                ),
-            ],
+                ]
+              : null,
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Container(
+            decoration: BoxDecoration(
+              color: NexoraColors.surface,
+              border: Border.all(color: NexoraColors.border),
+            ),
+            child: assetPath != null
+                ? SizedBox.expand(
+                    child: Image.asset(
+                      assetPath,
+                      fit: BoxFit.cover,
+                      alignment: Alignment.center,
+                      errorBuilder: (context, error, stackTrace) => const Center(
+                        child: FaIcon(FontAwesomeIcons.image,
+                            color: NexoraColors.muted),
+                      ),
+                    ),
+                  )
+                : const SizedBox.shrink(),
           ),
         ),
       ),

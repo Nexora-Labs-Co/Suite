@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/models/nexora_app.dart';
@@ -103,10 +102,11 @@ class NexoraAppCard extends StatelessWidget {
                           border: Border.all(color: NexoraColors.border),
                         ),
                         child: app.iconAsset != null
-                            ? SvgPicture.asset(
+                            ? Image.asset(
                                 app.iconAsset!,
                                 width: 28,
                                 height: 28,
+                                fit: BoxFit.contain,
                               )
                             : Text(
                                 app.name.isNotEmpty

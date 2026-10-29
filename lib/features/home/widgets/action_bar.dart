@@ -16,6 +16,8 @@ class NexoraActionBar extends StatelessWidget {
     this.onInstallAll,
     this.onToggleLeftSidebar,
     this.onToggleRightSidebar,
+    this.leftSidebarVisible = true,
+    this.rightSidebarVisible = false,
   });
 
   final AppViewMode viewMode;
@@ -26,8 +28,10 @@ class NexoraActionBar extends StatelessWidget {
   final VoidCallback? onInstallAll;
   final VoidCallback? onToggleLeftSidebar;
   final VoidCallback? onToggleRightSidebar;
+  final bool leftSidebarVisible;
+  final bool rightSidebarVisible;
 
-  static const double _iconSize = 22;
+  static const double _iconSize = 18;
 
   @override
   Widget build(BuildContext context) {
@@ -39,8 +43,12 @@ class NexoraActionBar extends StatelessWidget {
           IconButton(
             iconSize: _iconSize,
             padding: const EdgeInsets.all(8),
-            icon: const Icon(Icons.view_sidebar),
-            color: NexoraColors.foreground,
+            icon: FaIcon(
+              leftSidebarVisible
+                  ? FontAwesomeIcons.chevronLeft
+                  : FontAwesomeIcons.chevronRight,
+              color: NexoraColors.foreground,
+            ),
             onPressed: onToggleLeftSidebar,
           ),
           isRefreshing
@@ -76,18 +84,19 @@ class NexoraActionBar extends StatelessWidget {
           IconButton(
             iconSize: _iconSize,
             padding: const EdgeInsets.all(8),
-            icon: Transform.flip(
-              flipX: true,
-              child: const Icon(Icons.view_sidebar),
+            icon: FaIcon(
+              rightSidebarVisible
+                  ? FontAwesomeIcons.chevronRight
+                  : FontAwesomeIcons.chevronLeft,
+              color: NexoraColors.foreground,
             ),
-            color: NexoraColors.foreground,
             onPressed: onToggleRightSidebar,
           ),
           IconButton(
             iconSize: _iconSize,
             padding: const EdgeInsets.all(8),
-            icon: Icon(
-              Icons.account_circle_outlined,
+            icon: FaIcon(
+              FontAwesomeIcons.user,
               color: NexoraColors.muted,
             ),
             onPressed: null,

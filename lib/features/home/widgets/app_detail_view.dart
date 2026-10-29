@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/models/nexora_app.dart';
@@ -41,7 +40,12 @@ class AppDetailView extends StatelessWidget {
                   border: Border.all(color: NexoraColors.border),
                 ),
                 child: app.iconAsset != null
-                    ? SvgPicture.asset(app.iconAsset!, width: 44, height: 44)
+                    ? Image.asset(
+                        app.iconAsset!,
+                        width: 44,
+                        height: 44,
+                        fit: BoxFit.contain,
+                      )
                     : Text(
                         app.name.isNotEmpty ? app.name[0].toUpperCase() : '?',
                         style: const TextStyle(

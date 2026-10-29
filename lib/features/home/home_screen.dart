@@ -240,50 +240,63 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
                   setState(() => _leftSidebarCollapsed = !_leftSidebarCollapsed),
               onToggleRightSidebar: () =>
                   setState(() => _rightSidebarCollapsed = !_rightSidebarCollapsed),
+              leftSidebarVisible: !_leftSidebarCollapsed,
+              rightSidebarVisible: !_rightSidebarCollapsed,
             ),
             Expanded(
               child: _loading
                   ? const Center(child: CircularProgressIndicator())
-                  : NexoraSidebarLayout(
-                      sidebarWidth: 260,
-                      sidebarCollapsed: _leftSidebarCollapsed,
-                      sidebarCollapsedWidth: 0,
-                      sidebar: SuiteAppSidebar(
-                        apps: _apps,
-                        searchQuery: _search,
-                        selectedId: _selectedAppId,
-                        onSelected: (id) =>
-                            setState(() => _selectedAppId = id),
-                      ),
-                      body: Row(
-                        children: [
-                          Expanded(
-                            child: _selectedApp != null
-                                ? AppDetailView(
-                                    app: _selectedApp!,
-                                    onOpen: () => _openApp(_selectedApp!),
-                                    onInstall: () => _installApp(_selectedApp!),
-                                    onRefresh: _refresh,
-                                  )
-                                : _buildContent(),
+                  : Row(
+                      children: [
+                        NexoraSidebar(
+                          width: 280,
+                          collapsedWidth: 0,
+                          collapsed: _leftSidebarCollapsed,
+                          padding: EdgeInsets.zero,
+                          scrollable: false,
+                          child: SuiteAppSidebar(
+                            apps: _apps,
+                            searchQuery: _search,
+                            selectedId: _selectedAppId,
+                            onSelected: (id) =>
+                                setState(() => _selectedAppId = id),
                           ),
-                          if (!_rightSidebarCollapsed)
-                            Container(
-                              width: 260,
-                              decoration: const BoxDecoration(
-                                border: Border(
-                                  left: BorderSide(color: NexoraColors.border),
-                                ),
+                        ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Expanded(
+                                child: _selectedApp != null
+                                    ? AppDetailView(
+                                        app: _selectedApp!,
+                                        onOpen: () => _openApp(_selectedApp!),
+                                        onInstall: () =>
+                                            _installApp(_selectedApp!),
+                                        onRefresh: _refresh,
+                                      )
+                                    : _buildContent(),
                               ),
-                              child: Center(
-                                child: Text(
-                                  'Panel derecho',
-                                  style: TextStyle(color: NexoraColors.muted),
+                              if (!_rightSidebarCollapsed)
+                                Container(
+                                  width: 260,
+                                  decoration: const BoxDecoration(
+                                    border: Border(
+                                      left: BorderSide(
+                                          color: NexoraColors.border),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Panel derecho',
+                                      style: TextStyle(
+                                          color: NexoraColors.muted),
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                        ],
-                      ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
             ),
             NexoraFooterBar(
