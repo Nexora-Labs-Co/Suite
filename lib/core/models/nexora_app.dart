@@ -20,6 +20,7 @@ class NexoraApp {
     this.latestReleaseSize,
     this.githubUrl,
     this.homepageUrl,
+    this.platforms = 'Windows, Linux',
   });
 
   final String id;
@@ -50,6 +51,9 @@ class NexoraApp {
   final String? githubUrl;
   final String? homepageUrl;
 
+  /// Supported platforms string.
+  final String platforms;
+
   String get resolvedGithubUrl => githubUrl ?? 'https://github.com/$repo';
 
   bool get hasUpdate {
@@ -66,6 +70,7 @@ class NexoraApp {
     String? latestReleaseBody,
     int? latestReleaseSize,
     String? iconUrl,
+    String? platforms,
   }) {
     return NexoraApp(
       id: id,
@@ -84,6 +89,7 @@ class NexoraApp {
       latestReleaseSize: latestReleaseSize ?? this.latestReleaseSize,
       githubUrl: githubUrl,
       homepageUrl: homepageUrl,
+      platforms: platforms ?? this.platforms,
     );
   }
 }
@@ -99,6 +105,7 @@ const List<NexoraApp> kNexoraApps = <NexoraApp>[
     executable: 'harmony',
     installed: true,
     installedVersion: '26.10.27',
+    platforms: 'Windows, Linux, Android',
     iconAsset: 'assets/icons/Logo-Harmony.png',
   ),
   NexoraApp(
@@ -109,6 +116,7 @@ const List<NexoraApp> kNexoraApps = <NexoraApp>[
     repo: 'Nexora-Labs-Co/NexoraSuite',
     executable: 'nexora-suite',
     installed: true,
+    platforms: 'Windows, Linux',
     iconAsset: 'assets/icons/Logo-Suite.png',
   ),
 ];

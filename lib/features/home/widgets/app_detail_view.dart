@@ -90,6 +90,7 @@ class _AppDetailViewState extends State<AppDetailView> {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(24),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Header
@@ -214,7 +215,7 @@ class _AppDetailViewState extends State<AppDetailView> {
                 label: 'DOWNLOAD',
                 value: _formatBytes(app.latestReleaseSize ?? 0),
               ),
-              const _MetaCard(label: 'PLATFORMS', value: 'Linux, Android'),
+              _MetaCard(label: 'PLATFORMS', value: app.platforms),
             ],
           ),
           const SizedBox(height: 24),
