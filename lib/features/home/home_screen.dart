@@ -301,7 +301,7 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
             ),
             NexoraFooterBar(
               left: Text(
-                '$_syncStatus · v26.10.27+4',
+                '$_syncStatus · v26.10.29+1',
                 style: const TextStyle(color: NexoraColors.muted, fontSize: 11.5),
               ),
               right: Row(

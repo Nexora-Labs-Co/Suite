@@ -1,6 +1,6 @@
 # Build and package Nexora Suite for Windows (run on Windows PowerShell)
 $ErrorActionPreference = "Stop"
-$version = "26.10.27"
+$version = "26.10.29"
 
 flutter pub get
 flutter build windows --release
