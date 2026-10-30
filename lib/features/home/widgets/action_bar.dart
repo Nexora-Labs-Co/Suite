@@ -35,9 +35,13 @@ class NexoraActionBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return kit.NexoraActionBar(
+    return kit.NxTopNavigationBar(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
-      left: Row(
+      showBack: false,
+      showRefresh: false,
+      showSettings: false,
+      showProfile: false,
+      leading: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(
@@ -77,8 +81,7 @@ class NexoraActionBar extends StatelessWidget {
           ],
         ],
       ),
-      center: null,
-      right: Row(
+      trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           IconButton(

@@ -278,18 +278,24 @@ class _HomeScreenState extends State<HomeScreen> with WindowListener {
                               ),
                               if (!_rightSidebarCollapsed)
                                 Container(
-                                  width: 260,
                                   decoration: const BoxDecoration(
                                     border: Border(
                                       left: BorderSide(
                                           color: NexoraColors.border),
                                     ),
                                   ),
-                                  child: Center(
-                                    child: Text(
-                                      'Panel derecho',
-                                      style: TextStyle(
-                                          color: NexoraColors.muted),
+                                  child: NexoraSidebar(
+                                    width: 260,
+                                    collapsedWidth: 0,
+                                    collapsed: false,
+                                    showBorder: false,
+                                    backgroundColor: NexoraColors.surface,
+                                    child: Center(
+                                      child: Text(
+                                        'Panel derecho',
+                                        style: TextStyle(
+                                            color: NexoraColors.muted),
+                                      ),
                                     ),
                                   ),
                                 ),

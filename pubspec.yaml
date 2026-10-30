@@ -38,7 +38,7 @@ dependencies:
     sdk: flutter
 
   nexora_ui_kit:
-    path: ../NexoraUi-Kit
+    path: ../../ui/NexoraUi-Kit
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
